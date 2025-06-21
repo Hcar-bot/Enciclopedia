@@ -33,3 +33,11 @@ body {
     background-color: #45a049;
     border-color: #45a049;
 }
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.action-buttons a {
+    margin-right: 5px;
+}

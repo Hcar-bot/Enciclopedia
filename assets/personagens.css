@@ -1,0 +1,35 @@
+
+.personagem-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #ffffff; 
+}
+.personagem-card img {
+    max-width: 100%;
+    height: 150px; 
+    object-fit: contain; 
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #eee; 
+}
+.personagem-card h5 {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+.personagem-card p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}

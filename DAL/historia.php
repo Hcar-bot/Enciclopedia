@@ -4,7 +4,7 @@ namespace DAL;
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/DAL/conexao.php";
 include_once $_SERVER['DOCUMENTE_ROOT'] . "/models/Historia.php";
-use DAL\Conexao;
+use DAL\conection;
 
 class historia{
   public function Selecao(): array{

@@ -1,104 +1,65 @@
+
 <?php
+require_once __DIR__ . '/../DAL/Personagem.php';
 
-require_once __DIR__ . '/../models/Personagem.php';
 
-class PersonagemController {
-    private $personagemModel;
+use DAL\Personagem as DALPersonagem;
 
-    public function __construct() {
-        $this->personagemModel = new Personagem();
+class PersonagemController
+{
+    private $dalPersonagem;
+
+    public function __construct()
+    {
+        $this->dalPersonagem = new DALPersonagem();
     }
 
-    public function listarPublico() {
-        $personagens = $this->personagemModel->lerTodos(); 
-        require_once __DIR__ . '/../views/personagens/public_list.php'; 
+    public function listarPublico()
+    {
+        $personagens = $this->dalPersonagem->Select(); 
+        include_once 'views/personagens/public_list.php';
     }
 
-    public function detalhesPublico() {
-        $id = $_GET['id'] ?? null; 
-
-        if ($id) {
-            if ($this->personagemModel->lerUm($id)) {
-                $personagem = $this->personagemModel; 
-                require_once __DIR__ . '/../views/personagens/detalhes_publico.php'; 
-            } else {
-                echo "<h1>Personagem não encontrado!</h1>";
-                echo '<p><a href="index.php?action=listar_personagens_publico" class="btn btn-secondary">Voltar para a lista</a></p>';
-            }
-        } else {
-            header("Location: index.php?action=listar_personagens_publico");
+    public function listarAdmin()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: index.php?action=mostrar_login');
             exit();
         }
+        $personagens = $this->dalPersonagem->Select(); 
+        include_once 'views/personagens/admin_list.php';
     }
 
-    public function listarAdmin() {
-        if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
-            header("Location: index.php?action=mostrar_login&erro=2");
-            exit();
-        }
-
-        $personagens = $this->personagemModel->lerTodos();
-        require_once __DIR__ . '/../views/personagens/admin_list.php'; 
-    }
-
-    
-    public function inserir() {
-        if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
-            header("Location: index.php?action=mostrar_login&erro=2");
-            exit();
-        }
-
-        $mensagem = []; 
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->personagemModel->nome = $_POST['nome'] ?? '';
-            $this->personagemModel->descricao = $_POST['descricao'] ?? '';
-            $this->personagemModel->imagem_url = $_POST['imagem_url'] ?? '';
-            $this->personagemModel->tipo = $_POST['tipo'] ?? '';
-
-            if (empty($this->personagemModel->nome) || empty($this->personagemModel->tipo)) {
-                $mensagem = ['tipo' => 'erro', 'texto' => 'Nome e Tipo são campos obrigatórios.'];
-            } else {
-                if ($this->personagemModel->criar()) {
-                    $mensagem = ['tipo' => 'sucesso', 'texto' => 'Personagem adicionado com sucesso!'];
-                    $this->personagemModel->nome = '';
-                    $this->personagemModel->descricao = '';
-                    $this->personagemModel->imagem_url = '';
-                    $this->personagemModel->tipo = '';
-                } else {
-                    $mensagem = ['tipo' => 'erro', 'texto' => 'Erro ao adicionar personagem. Verifique o nome (pode ser duplicado).'];
-                }
-            }
-        }
-        require_once __DIR__ . '/../views/personagens/inserir.php';
-    }
-
-    public function editar() {
-        if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
-            header("Location: index.php?action=mostrar_login&erro=2");
-            exit();
-        }
-        echo "Página de Edição de Personagem (em construção)";
-    }
-
-    public function deletar() {
-        if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
-            header("Location: index.php?action=mostrar_login&erro=2");
-            exit();
-        }
-
+    public function detalhesPublico()
+    {
         $id = $_GET['id'] ?? null;
-        if ($id && $this->personagemModel->id = $id) { 
-            if ($this->personagemModel->deletar()) {
-                header("Location: index.php?action=listar_personagens_admin&mensagem=sucesso_delete");
-                exit();
+        if ($id) {
+            $personagem = $this->dalPersonagem->SelectById($id); 
+            if ($personagem) {
+                include_once 'views/personagens/detalhes_publico.php';
             } else {
-                header("Location: index.php?action=listar_personagens_admin&mensagem=erro_delete");
-                exit();
+                echo "Personagem não encontrado.";
             }
         } else {
-            header("Location: index.php?action=listar_personagens_admin");
-            exit();
+            echo "ID do personagem não fornecido.";
         }
+    }
+
+
+    public function inserir()
+    {
+   
+        include_once 'views/personagens/inserir.php';
+    }
+
+    public function editar()
+    {
+        
+        echo "Lógica de edição aqui (ainda será implementada com a nova arquitetura).";
+    }
+
+    public function deletar()
+    {
+        echo "Lógica de deleção aqui (ainda será implementada com a nova arquitetura).";
     }
 }

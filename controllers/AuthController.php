@@ -1,39 +1,51 @@
 <?php
 
-require_once __DIR__ . '/../models/Usuario.php';
+require_once __DIR__ . '/../MODEL/Usuario.php';
+require_once __DIR__ . '/../DAL/Usuario.php';
 
-class AuthController {
-    public function login() {
+use MODEL\Usuario as ModelUsuario;
+use DAL\Usuario as DALUsuario;
+
+class AuthController
+{
+    private $dalUsuario;
+
+    public function __construct()
+    {
+        $this->dalUsuario = new DALUsuario();
+    }
+
+    public function login()
+    {
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
-            $senha = $_POST['senha'] ?? '';
+            $password = $_POST['password'] ?? '';
 
-            $usuario = new Usuario(); 
+            $usuario = $this->dalUsuario->autenticar($email);
 
-            if ($usuario->autenticar($email, $senha)) {
-                session_start(); 
-
+        
+            if ($usuario && password_verify($password, $usuario->getSenha())) {
+               
+                $_SESSION['user_id'] = $usuario->getId();
+                $_SESSION['usuario_nome'] = $usuario->getNome();
                 $_SESSION['logado'] = true;
-                $_SESSION['usuario_id'] = $usuario->id;
-                $_SESSION['usuario_nome'] = $usuario->nome_usuario;
-                $_SESSION['usuario_email'] = $usuario->email;
-
-                header("Location: index.php?action=dashboard"); 
+                header('Location: index.php?action=dashboard');
                 exit();
             } else {
-                header("Location: index.php?action=mostrar_login&erro=1");
-                exit();
+                $erro = 'Credenciais inválidas.';
+                include_once 'views/auth/login.php';
             }
         } else {
-            require_once __DIR__ . '/../views/auth/login.php';
+            include_once 'views/auth/login.php';
         }
-    }
+    } 
 
-    public function logout() {
-        session_start(); 
-        session_unset();   
-        session_destroy(); 
-        header("Location: index.php?action=mostrar_login&logout=1");
+    public function logout()
+    {
+        session_destroy();
+        header('Location: index.php?action=mostrar_login&mensagem=logout_sucesso');
         exit();
-    }
-}
+    } 
+} 
+?>

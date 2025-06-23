@@ -33,7 +33,7 @@ $mensagem_texto = $mensagem['texto'] ?? '';
                     }
                     ?>
 
-                    <form action="index.php?action=inserir_personagem" method="POST">
+                    <form action="views/personagens/opInsPersonagem.php" method="POST" class="col s10">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome do Personagem:</label>
                             <input type="text" class="form-control" id="nome" name="nome" value="<?php echo htmlspecialchars($nome); ?>" required>

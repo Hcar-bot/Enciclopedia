@@ -24,17 +24,19 @@
         }
         ?>
 
-        <form action="index.php?action=login" method="POST">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="senha" class="form-label">Senha:</label>
-                <input type="password" class="form-control" id="senha" name="senha" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-        </form>
+      <form action="index.php?action=login" method="POST">
+    <div class="input-field col s12">
+        <input id="email_login" type="text" name="email" class="validate" required>
+        <label for="email_login">Email:</label>
+    </div>
+    <div class="input-field col s12">
+        <input id="password_login" type="password" name="password" class="validate" required>
+        <label for="password_login">Senha:</label>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
+        <i class="material-icons right"> Enviar </i>
+    </button>
+</form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

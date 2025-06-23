@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,7 +35,7 @@
                                     echo nl2br(htmlspecialchars($descricaoCurta));
                                     ?>
                                 </p>
-                                <a href="<?php echo BASE_URL; ?>index.php?action=detalhes_historia_publico&idH=<?php echo $historia->getId(); ?>" class="btn btn-primary btn-sm">Ver Detalhes</a>
+                                <a href="<?php echo BASE_URL; ?>index.php?action=detalhes_historia_publico&idH=<?php echo $historia->getId(); ?>" class="btn btn-info btn-sm">Ver Detalhes</a>
                             </div>
                             <div class="card-footer text-muted">
                                 Adicionado em: <?php echo htmlspecialchars($historia->getDataAdd()); ?>

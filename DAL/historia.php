@@ -45,31 +45,33 @@ class Historia
     public function SelectById(int $id): ?ModelHistoria
     {
         try {
-            $sql = "SELECT * FROM historia WHERE idH = :idH";
-            $stmt = $this->conexao_pdo->prepare($sql);
-            $stmt->bindValue(':idH', $id, PDO::PARAM_INT);
+            $pdo = $this->conexao->conecta();
+            $sql = "SELECT idH, nomeH, generoH, descricaoH, data_addH, data_updateH FROM historia WHERE idH = :idH";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':idH', $id, \PDO::PARAM_INT);
             $stmt->execute();
 
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if ($row) {
-                
                 return new ModelHistoria(
-                    $row['idH'] ?? null,
+                    $row['idH'],
                     $row['nomeH'],
                     $row['generoH'],
                     $row['descricaoH'],
-                    $row['data_addH'] ?? null,
-                    $row['data_updateH'] ?? null
+                    $row['data_addH'],
+                    $row['data_updateH']
                 );
+            } else {
+                return null;
             }
+        } catch (\PDOException $e) {
+            error_log("Erro no DB (DAL Historia::SelectById): " . $e->getMessage());
             return null; 
-        } catch (PDOException $e) {
-            error_log("Erro DAL/Historia::SelectById - " . $e->getMessage());
-            return null;
+        } finally {
+            $this->conexao->desconecta();
         }
     }
-
     
     public function Insert(ModelHistoria $historia): bool
     {
@@ -88,35 +90,47 @@ class Historia
         }
     }
 
-    public function Update(ModelHistoria $historia): bool
+  public function Update(ModelHistoria $historia)
     {
         try {
+            $pdo = $this->conexao->conecta();
             $sql = "UPDATE historia SET nomeH = :nomeH, generoH = :generoH, descricaoH = :descricaoH, data_updateH = NOW() WHERE idH = :idH";
-            $stmt = $this->conexao_pdo->prepare($sql);
+            $stmt = $pdo->prepare($sql);
 
             $stmt->bindValue(':nomeH', $historia->getNome());
             $stmt->bindValue(':generoH', $historia->getGen());
             $stmt->bindValue(':descricaoH', $historia->getDesc());
-            $stmt->bindValue(':idH', $historia->getId(), PDO::PARAM_INT);
+            $stmt->bindValue(':idH', $historia->getId()); // O ID é crucial para o UPDATE
 
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Erro DAL/Historia::Update - " . $e->getMessage());
+            $stmt->execute();
+            return true;
+        } catch (\PDOException $e) {
+            error_log("Erro no DB (DAL Historia::Update): " . $e->getMessage());
+            // Se você ainda tem o 'die()' temporário aqui, remova-o para que o controlador possa redirecionar com a mensagem
             return false;
+        } finally {
+            $this->conexao->desconecta();
         }
     }
 
-    public function Delete(int $id): bool
-    {
-        try {
-            $sql = "DELETE FROM historia WHERE idH = :idH";
-            $stmt = $this->conexao_pdo->prepare($sql);
-            $stmt->bindValue(':idH', $id, PDO::PARAM_INT);
 
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Erro DAL/Historia::Delete - " . $e->getMessage());
-            return false;
-        }
+public function Delete(int $id)
+{
+    try {
+        $pdo = $this->conexao->conecta();
+        $sql = "DELETE FROM historia WHERE idH = :idH";
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindValue(':idH', $id);
+
+        $stmt->execute();
+        return true;
+    } catch (\PDOException $e) {
+        error_log("Erro no DB (DAL Historia::Delete): " . $e->getMessage());
+        return false;
+    } finally {
+        $this->conexao->desconecta();
     }
+}
+
 }

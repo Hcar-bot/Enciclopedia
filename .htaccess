@@ -1,0 +1,8 @@
+# C:\xampp\htdocs\Enciclopedia\.htaccess
+
+RewriteEngine On
+RewriteBase /Enciclopedia/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]

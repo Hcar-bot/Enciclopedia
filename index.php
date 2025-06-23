@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 
-define('BASE_URL','/Enciclopedia');
+define('BASE_URL','/Enciclopedia/');
 
 require_once __DIR__ . '/config/autoloader.php';
 
@@ -35,11 +35,12 @@ if ($requires_auth && (!isset($_SESSION['logado']) || $_SESSION['logado'] !== tr
 }
 
 switch ($action) {
-    case 'home':
+      case 'home':
         echo "<h1>Bem-vindo à Enciclopédia!</h1>";
-        echo "<p>Explore personagens, mundos e colecionáveis do seu jogo favorito.</p>";
-        echo '<p><a href="index.php?action=listar_personagens_publico" class="btn btn-info">Ver Personagens</a></p>';
-        echo '<p><a href="index.php?action=mostrar_login" class="btn btn-secondary">Área Administrativa (Login)</a></p>';
+        echo "<p>Explore nossos personagens e histórias.</p>";
+        echo '<p><a href="' . BASE_URL . 'index.php?action=listar_personagens_publico" class="btn btn-primary me-2">Ver Personagens</a></p>';
+        echo '<p><a href="' . BASE_URL . 'index.php?action=listar_historias_publico" class="btn btn-info">Ver Histórias</a></p>';
+        echo '<p><a href="' . BASE_URL . 'index.php?action=mostrar_login" class="btn btn-secondary mt-3">Acesso Administrativo</a></p>';
         break;
 
     case 'mostrar_login':
@@ -58,10 +59,16 @@ switch ($action) {
         break;
 
     case 'dashboard':
-        echo "<h1>Bem-vindo ao Dashboard Administrativo, " . $_SESSION['usuario_nome'] . "!</h1>";
-        echo '<p><a href="index.php?action=listar_personagens_admin" class="btn btn-primary">Gerenciar Personagens</a></p>';
-        echo '<p><a href="index.php?action=logout" class="btn btn-danger mt-3">Sair</a></p>';
-        break;
+    if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
+        header("Location: " . BASE_URL . "index.php?action=mostrar_login&erro=2");
+        exit();
+    }
+    echo "<h1>Bem-vindo ao Dashboard Administrativo, " . htmlspecialchars($_SESSION['usuario_nome']) . "!</h1>";
+    echo '<p><a href="' . BASE_URL . 'index.php?action=listar_personagens_admin" class="btn btn-primary me-2">Gerenciar Personagens</a></p>';
+    echo '<p><a href="' . BASE_URL . 'index.php?action=listar_historias_admin" class="btn btn-info me-2">Gerenciar Histórias</a></p>';
+    echo '<p><a href="' . BASE_URL . 'index.php?action=logout" class="btn btn-danger mt-3">Sair</a></p>';
+    break;
+
 
     case 'listar_personagens_publico':
         include_once 'views/personagens/public_list.php';

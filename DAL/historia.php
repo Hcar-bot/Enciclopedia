@@ -7,6 +7,7 @@ use MODEL\Historia as ModelHistoria;
 use PDO; 
 use PDOException; 
 
+
 class Historia
 {
     private $conexao_pdo;

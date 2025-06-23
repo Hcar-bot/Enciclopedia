@@ -137,6 +137,7 @@ class ControlHistoria
         $generoH = filter_input(INPUT_POST, 'generoH', FILTER_SANITIZE_SPECIAL_CHARS);
         $descricaoH = filter_input(INPUT_POST, 'descricaoH', FILTER_SANITIZE_SPECIAL_CHARS);
 
+
         if ($idH && $nomeH && $generoH && $descricaoH) {
             $historia = new ModelHistoria($idH, $nomeH, $generoH, $descricaoH);
             

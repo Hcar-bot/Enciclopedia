@@ -1,9 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Huninn&family=Krona+One&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Huninn&family=Jost:ital,wght@0,100..900;1,100..900&family=Krona+One&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Huninn&family=Jost:ital,wght@0,100..900;1,100..900&family=Krona+One&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap');
+
+
+
+
+
 
 :root{
     --fonte-titulo: "Huninn", sans-serif;
     --fonte-texto: "Jost", sans-serif;
+    --fonte-logo: "Anton", sans-serif;
 }
 
 
@@ -14,6 +21,121 @@ body {
     align-items: center;
     min-height: 100vh;
     font-family: var(--fonte-texto);
+}
+
+header{
+   padding: 5px 0;
+   height: 50px;
+  background-color: slategray;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+main{
+    flex:1;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulobox{
+    background-color: dimgray;
+    border-radius: 10px;
+    width: 500px;
+    height: 100px;
+}
+.titulobox2{
+    background-color: dimgray;
+    border-radius: 10px;
+    width: 605px;
+    height: 105px;
+}
+.apresentaçãoButton{
+    background-color: darkslategray;
+    border-radius: 10px;
+    width: 500px;
+    height: 100px;
+    display: flex;
+}
+
+.button{
+  width: 200px;
+  text-align: center;
+  padding: 5px 6px;
+  text-decoration:none;
+  font-size: 16px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  color:black;
+  font-weight: bold;
+  border-radius: 7px;
+  background-color:lightblue;
+  font-family: var(--fonte-texto);
+}
+.buttonSair{
+  width: 178px;
+  text-align: center;
+  padding: 5px 6px;
+  text-decoration:none;
+  font-size: 16px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  color:black;
+  font-weight: bold;
+  border-radius: 7px;
+  background-color:crimson;
+  font-family: var(--fonte-texto);
+}
+ 
+
+
+
+
+.buttonHisto{
+  width: 200px;
+  text-align: center;
+  padding: 5px 6px;
+  text-decoration:none;
+  font-size: 16px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  color:black;
+  font-weight: bold;
+  border-radius: 7px;
+  background-color:mediumslateblue;
+  font-family: var(--fonte-texto);
+}
+.button:hover{
+    background-color: teal;
+    color:white;
+}
+.buttonHisto:hover{
+    background-color: indigo;
+    color:white;
+}
+.buttonSair:hover{
+    background-color:darkred;
+    color: white;
+}
+.texto{
+    font-family: var(--fonte-texto);
+    align-self: center;
+    text-align: center;
+    font-size: 16px;
+}
+
+.rodapé{
+    color:beige;
+    background-color:slategrey;
+    padding: 17px;
+    text-align: center;
+    font-family: var(--fonte-texto);
+    font-weight: 400;
+    font-size: 1rem;
 }
 
 .login-container {

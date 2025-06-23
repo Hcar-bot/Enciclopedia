@@ -94,8 +94,8 @@ class Personagem
         }
     }
 
-    // Método para atualizar um personagem existente
-    public function Update(Personagem $personagem) // Recebe um objeto MODEL\Personagem
+ 
+    public function Update(Personagem $personagem) 
     {
         $sql = "UPDATE personagens SET nome = ?, tipo = ?, descricao = ?, imagem_url = ?, data_atualizacao = NOW() WHERE id = ?;";
 
@@ -112,7 +112,7 @@ class Personagem
         return $result;
     }
 
-    // Método para deletar um personagem
+
     public function Delete(int $id)
     {
         $sql = "DELETE FROM personagens WHERE id = ?;";

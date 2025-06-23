@@ -35,8 +35,9 @@ body {
 }
 
 .btn-primary { 
-    background-color: #4CAF50; 
-    border-color: #4CAF50;
+    text-align: center;
+    background-color:grey; 
+    border-color:darkslategrey;
 }
 .btn-primary:hover {
     background-color: #45a049;
@@ -49,4 +50,8 @@ body {
 
 .action-buttons a {
     margin-right: 5px;
+}
+
+.login{
+  text-align: center;
 }

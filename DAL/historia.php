@@ -83,7 +83,7 @@ class Historia
             $stmt->bindValue(':generoH', $historia->getGen());
             $stmt->bindValue(':descricaoH', $historia->getDesc());
 
-            return $stmt->execute(); // Retorna true ou false
+            return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Erro DAL/Historia::Insert - " . $e->getMessage());
             return false;
@@ -100,13 +100,12 @@ class Historia
             $stmt->bindValue(':nomeH', $historia->getNome());
             $stmt->bindValue(':generoH', $historia->getGen());
             $stmt->bindValue(':descricaoH', $historia->getDesc());
-            $stmt->bindValue(':idH', $historia->getId()); // O ID é crucial para o UPDATE
+            $stmt->bindValue(':idH', $historia->getId()); 
 
             $stmt->execute();
             return true;
         } catch (\PDOException $e) {
             error_log("Erro no DB (DAL Historia::Update): " . $e->getMessage());
-            // Se você ainda tem o 'die()' temporário aqui, remova-o para que o controlador possa redirecionar com a mensagem
             return false;
         } finally {
             $this->conexao->desconecta();

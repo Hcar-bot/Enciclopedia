@@ -10,11 +10,34 @@ use PDOException;
 class Personagem
 {
     private $conexao_pdo; 
+    private $id;
+    private $nome;
+    private $tipo;
+    private $descricao;
+    private $imagem_url;
+    private $data_criacao;
+    private $data_atualizacao;
 
     public function __construct()
     {
         $this->conexao_pdo = Conexao::conectar();
     }
+
+    public function setId($id): mixed {return $this-> id = $id;}
+    public function getId(): mixed {return $this->id;}
+    public function setNome($nome): mixed {return $this-> nome = $nome;}
+    public function getNome(): mixed {return $this->nome;}
+    public function setTipo($tipo): mixed {return $this-> tipo = $tipo;}
+    public function getTipo(): mixed {return $this->tipo;}
+    public function setDescricao($descricao): mixed {return $this-> descricao = $descricao;}
+    public function getDescricao(): mixed {return $this->descricao;}
+    public function setImagemUrl($imagem_url): mixed {return $this-> imagem_url = $imagem_url;}
+    public function getImagemUrl(): mixed {return $this->imagem_url;}
+    public function setDataCriacao($data_criacao): mixed {return $this-> data_criacao = $data_criacao;}
+    public function getDataCriacao(): mixed {return $this->data_criacao;}
+    public function setDataAtualizacao($data_atualizacao): mixed {return $this-> data_atualizacao = $data_atualizacao;}
+    public function getDataAtualizacao(): mixed {return $this->data_atualizacao;}
+
 
     public function Select()
     {
@@ -93,7 +116,6 @@ class Personagem
     public function Delete(int $id)
     {
         $sql = "DELETE FROM personagens WHERE id = ?;";
-
         $con = Conexao::conectar();
         $query = $con->prepare($sql);
         $result = $query->execute(array($id));

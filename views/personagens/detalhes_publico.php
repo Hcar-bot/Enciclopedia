@@ -38,7 +38,7 @@ if ($id) {
                     <div class="card grey lighten-4">
                         <div class="card-image">
                             <?php if ($personagem->getImagemUrl()): ?>
-                                <img src="<?php echo htmlspecialchars($personagem->getImagemUrl()); ?>" alt="<?php echo htmlspecialchars($personagem->getNome()); ?>" class="responsive-img">
+                                <img src="<?php echo htmlspecialchars($personagem->getImagemUrl()); ?>" alt="<?php echo htmlspecialchars($personagem-> getNome()); ?>" class="responsive-img">
                             <?php endif; ?>
                             <span class="card-title black-text"><?php echo htmlspecialchars($personagem->getNome()); ?></span>
                         </div>

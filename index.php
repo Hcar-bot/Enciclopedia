@@ -1,19 +1,16 @@
 <?php
 
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-
-
 define('BASE_URL','/Enciclopedia/');
 
 require_once __DIR__ . '/config/autoloader.php';
-
 require_once __DIR__ . '/controllers/AuthController.php';
-
 require_once __DIR__ . '/controllers/ControlHistoria.php';
+require_once 'config/Database.php';
+require_once 'controllers/PersonagemController.php';
 
 
 $action = $_GET['action'] ?? 'home';

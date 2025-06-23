@@ -4,7 +4,7 @@ namespace DAL;
 
 class Conexao
 {
-    private static $dbNome = 'enciclopedia';
+    private static $dbNome = 'jogos';
     private static $dbHost = 'localhost';
     private static $dbUsuario = 'root'; 
     private static $dbSenha = '';     

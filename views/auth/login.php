@@ -25,16 +25,17 @@
         ?>
 
       <form action="index.php?action=login" method="POST">
-    <div class="input-field col s12">
+    <div class=".login">
         <input id="email_login" type="text" name="email" class="validate" required>
         <label for="email_login">Email:</label>
     </div>
+    <br>
     <div class="input-field col s12">
         <input id="password_login" type="password" name="password" class="validate" required>
         <label for="password_login">Senha:</label>
     </div>
-    <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
-        <i class="material-icons right"> Enviar </i>
+    <br>
+    <button class=".btn-primary" type="submit" name="action">Entrar
     </button>
 </form>
     </div>

@@ -13,6 +13,8 @@ require_once __DIR__ . '/config/autoloader.php';
 
 require_once __DIR__ . '/controllers/AuthController.php';
 
+require_once __DIR__ . '/controllers/ControlHistoria.php';
+
 
 $action = $_GET['action'] ?? 'home';
 
@@ -85,8 +87,41 @@ switch ($action) {
         include_once 'views/personagens/opRemPersonagem.php';
         break;
 
+case 'listar_historias_publico':
+    $controller = new ControlHistoria();
+    $controller->listagemPub();
+    break;
+case 'detalhes_historia_publico':
+    $controller = new ControlHistoria();
+    $controller->detailsPub();
+    break;
 
-        case 'inserir_personagem': // Adicione este case ou ajuste o existente
+case 'listar_historias_admin':
+    $controller = new ControlHistoria();
+    $controller->listagemAdmin();
+    break;
+case 'adicionar_historia': 
+    $controller = new ControlHistoria();
+    $controller->showFormAdd();
+    break;
+case 'processar_adicao_historia': 
+    $controller = new ControlHistoria();
+    $controller->processAdd();
+    break;
+case 'editar_historia': 
+    $controller = new ControlHistoria();
+    $controller->showFormEdit();
+    break;
+case 'processar_edicao_historia':
+    $controller = new ControlHistoria();
+    $controller->processEdit();
+    break;
+case 'deletar_historia': 
+    $controller = new ControlHistoria();
+    $controller->processDelete();
+    break;
+
+        case 'inserir_personagem': 
     if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
         header("Location: index.php?action=mostrar_login&erro=2");
         exit();
@@ -94,12 +129,12 @@ switch ($action) {
     include_once 'views/personagens/frmInsPersonagem.php';
     break;
 
-case 'processar_insercao_personagem': // Nova rota para processar o formulário
+case 'processar_insercao_personagem': 
     if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
         header("Location: index.php?action=mostrar_login&erro=2");
         exit();
     }
-    include_once 'views/personagens/opInsPersonagem.php'; // Vamos criar este arquivo em seguida
+    include_once 'views/personagens/opInsPersonagem.php'; 
     break;
 
     default:

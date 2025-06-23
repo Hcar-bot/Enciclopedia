@@ -6,12 +6,12 @@ use DateTime;
 
 class Historia
 {
-    private ?int $idH;
-    private ?string $nomeH;
-    private ?string $generoH;
-    private ?string $descricaoH;
-    private ?string $data_addH;   
-    private ?string $data_updateH;
+    public ?int $idH;
+    public ?string $nomeH;
+    public ?string $generoH;
+    public ?string $descricaoH;
+    public ?string $data_addH;   
+    public ?string $data_updateH;
 
     public function __construct(
         ?int $idH = null,
@@ -78,3 +78,4 @@ class Historia
         $this->data_updateH = $data_updateH;
     }
 }
+?>
